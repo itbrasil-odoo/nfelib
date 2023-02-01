@@ -7732,7 +7732,8 @@ class ideType(GeneratedsSuper):
             outfile.write('<%sxJust>%s</%sxJust>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.xJust), input_name='xJust')), namespaceprefix_ , eol_))
         for NFref_ in self.NFref:
             namespaceprefix_ = self.NFref_nsprefix_ + ':' if (UseCapturedNS_ and self.NFref_nsprefix_) else ''
-            NFref_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='NFref', pretty_print=pretty_print)
+            if hasattr(NFref_, 'export'):
+                NFref_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='NFref', pretty_print=pretty_print)
     def build(self, node, gds_collector_=None):
         self.gds_collector_ = gds_collector_
         if SaveElementTreeNode:
