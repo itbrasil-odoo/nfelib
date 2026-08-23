@@ -63,6 +63,14 @@ SCHEMAS: Final[dict[str, SchemaConfig]] = {
         schema_dir="nfelib/nfe/schemas/v4_0",
         package="nfelib.nfe.bindings.v4_0",
     ),
+    # NFCom (modelo 62). Os XSDs vêm do portal da SVRS, que é o autorizador da
+    # maioria das UFs — MG, MT e MS mantêm ambiente próprio, com o mesmo leiaute.
+    "nfcom": SchemaConfig(
+        name="nfcom",
+        schema_dir="nfelib/nfcom/schemas/v1_0",
+        package="nfelib.nfcom.bindings.v1_0",
+        download_url="https://dfe-portal.svrs.rs.gov.br/Schemas/PRNFCOM",
+    ),
     "nfe_dist_dfe": SchemaConfig(
         name="nfe_dist_dfe",
         schema_dir="nfelib/nfe_dist_dfe/schemas/v1_0",
