@@ -9,28 +9,32 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
 
+from nfelib.nfcom.bindings.v1_0.dfe_tipos_basicos_v1_00 import TpagamentoRtc
+
 __NAMESPACE__ = "http://www.portalfiscal.inf.br/nfcom"
 
 
-class EvCancNfcomDescEvento(Enum):
-    CANCELAMENTO = "Cancelamento"
+class EvVincPgtoDescEvento(Enum):
+    VINCULA_O_DO_PAGAMENTO = "Vinculação do Pagamento"
+    VINCULACAO_DO_PAGAMENTO = "Vinculacao do Pagamento"
 
 
 @dataclass(kw_only=True)
-class EvCancNfcom:
+class EvVincPgto:
     """
-    Schema XML de validação do evento do cancelamento 110111.
+    Schema XML de validação do evento de vinculação da transação de
+    pagamento com o DFe - 110300.
 
-    :ivar descEvento: Descrição do Evento - “Cancelamento”
-    :ivar nProt: Número do Protocolo de Status da NFCom
-    :ivar xJust: Justificativa do Cancelamento
+    :ivar descEvento: Descrição do Evento - “Vinculação Pagamento”
+    :ivar nProt: Número do Protocolo de autorização do DFe
+    :ivar pgto: Vinuclação com o pagamento
     """
 
     class Meta:
-        name = "evCancNFCom"
+        name = "evVincPgto"
         namespace = "http://www.portalfiscal.inf.br/nfcom"
 
-    descEvento: EvCancNfcomDescEvento = field(
+    descEvento: EvVincPgtoDescEvento = field(
         metadata={
             "type": "Element",
             "white_space": "preserve",
@@ -43,12 +47,8 @@ class EvCancNfcom:
             "pattern": r"[0-9]{16}",
         }
     )
-    xJust: str = field(
+    pgto: TpagamentoRtc = field(
         metadata={
             "type": "Element",
-            "min_length": 15,
-            "max_length": 255,
-            "white_space": "preserve",
-            "pattern": r"[!-ÿ]{1}[ -ÿ]{0,}[!-ÿ]{1}|[!-ÿ]{1}",
         }
     )

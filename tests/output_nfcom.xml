@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NFCom xmlns="http://www.portalfiscal.inf.br/nfcom">
+  <infNFCom versao="1.00" Id="NFCom35260822570047000123620010000000021012345671">
+    <ide>
+      <cUF>35</cUF>
+      <tpAmb>2</tpAmb>
+      <mod>62</mod>
+      <serie>1</serie>
+      <nNF>2</nNF>
+      <cNF>1234567</cNF>
+      <cDV>1</cDV>
+      <dhEmi>2026-08-22T09:30:00-03:00</dhEmi>
+      <tpEmis>1</tpEmis>
+      <nSiteAutoriz>0</nSiteAutoriz>
+      <cMunFG>3509502</cMunFG>
+      <finNFCom>0</finNFCom>
+      <tpFat>0</tpFat>
+      <verProc>1.0</verProc>
+    </ide>
+    <emit>
+      <CNPJ>22570047000123</CNPJ>
+      <IE>122791679116</IE>
+      <CRT>1</CRT>
+      <xNome>MMF SERVICOS DE TECNOLOGIA DA INFORMACAO LTDA</xNome>
+      <xFant>IT BRASIL - EXCELENCIA EM TELECOM</xFant>
+      <enderEmit>
+        <xLgr>Latino Coelho</xLgr>
+        <nro>12</nro>
+        <xBairro>Parque Taquaral</xBairro>
+        <cMun>3509502</cMun>
+        <xMun>Campinas</xMun>
+        <CEP>13087010</CEP>
+        <UF>SP</UF>
+        <fone>1931131000</fone>
+        <email>cloud@itbrasil.com.br</email>
+      </enderEmit>
+    </emit>
+    <dest>
+      <xNome>NFCom EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome>
+      <CNPJ>41832075000116</CNPJ>
+      <indIEDest>1</indIEDest>
+      <IE>647468723430</IE>
+      <enderDest>
+        <xLgr>Avenida das Nacoes</xLgr>
+        <nro>1500</nro>
+        <xBairro>Aeroporto</xBairro>
+        <cMun>3550308</cMun>
+        <xMun>SAO PAULO</xMun>
+        <CEP>04626000</CEP>
+        <UF>SP</UF>
+      </enderDest>
+    </dest>
+    <assinante>
+      <iCodAssinante>SERRAAZUL001</iCodAssinante>
+      <tpAssinante>1</tpAssinante>
+      <tpServUtil>1</tpServUtil>
+      <nContrato>ARION20250042</nContrato>
+      <dContratoIni>2025-09-01</dContratoIni>
+    </assinante>
+    <det nItem="1">
+      <prod>
+        <cProd>LINK1G</cProd>
+        <xProd>NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xProd>
+        <cClass>0400401</cClass>
+        <CFOP>5303</CFOP>
+        <uMed>4</uMed>
+        <qFaturada>1</qFaturada>
+        <vItem>18500.00</vItem>
+        <vProd>18500.00</vProd>
+      </prod>
+      <imposto>
+        <ICMS00>
+          <CST>00</CST>
+          <vBC>18500.00</vBC>
+          <pICMS>25.00</pICMS>
+          <vICMS>4625.00</vICMS>
+        </ICMS00>
+        <PIS>
+          <CST>01</CST>
+          <vBC>18500.00</vBC>
+          <pPIS>0.65</pPIS>
+          <vPIS>120.25</vPIS>
+        </PIS>
+        <COFINS>
+          <CST>01</CST>
+          <vBC>18500.00</vBC>
+          <pCOFINS>3.00</pCOFINS>
+          <vCOFINS>555.00</vCOFINS>
+        </COFINS>
+      </imposto>
+    </det>
+    <total>
+      <vProd>18500.00</vProd>
+      <ICMSTot>
+        <vBC>18500.00</vBC>
+        <vICMS>4625.00</vICMS>
+        <vICMSDeson>0.00</vICMSDeson>
+        <vFCP>0.00</vFCP>
+      </ICMSTot>
+      <vCOFINS>555.00</vCOFINS>
+      <vPIS>120.25</vPIS>
+      <vFUNTTEL>0.00</vFUNTTEL>
+      <vFUST>0.00</vFUST>
+      <vRetTribTot>
+        <vRetPIS>0.00</vRetPIS>
+        <vRetCofins>0.00</vRetCofins>
+        <vRetCSLL>0.00</vRetCSLL>
+        <vIRRF>0.00</vIRRF>
+      </vRetTribTot>
+      <vDesc>0.00</vDesc>
+      <vOutro>0.00</vOutro>
+      <vNF>18500.00</vNF>
+    </total>
+    <gFat>
+      <CompetFat>202608</CompetFat>
+      <dVencFat>2026-09-10</dVencFat>
+      <dPerUsoIni>2026-08-01</dPerUsoIni>
+      <dPerUsoFim>2026-08-31</dPerUsoFim>
+      <codBarras>846700000018500001234560220592608220000000000001</codBarras>
+    </gFat>
+  </infNFCom>
+  <infNFComSupl>
+    <qrCodNFCom>https://dfe-portal.svrs.rs.gov.br/NFCom/QRCode?chNFCom=35260822570047000123620010000000021012345671&amp;tpAmb=2</qrCodNFCom>
+  </infNFComSupl>
+  <ns1:Signature xmlns:ns1="http://www.w3.org/2000/09/xmldsig#">
+    <ns1:SignedInfo>
+      <ns1:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <ns1:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <ns1:Reference URI="#NFCom35260822570047000123620010000000021012345671">
+        <ns1:Transforms>
+          <ns1:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+          <ns1:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        </ns1:Transforms>
+        <ns1:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <ns1:DigestValue>72fyGeEyfTYK1quWqFVnUyWJm6w=</ns1:DigestValue>
+      </ns1:Reference>
+    </ns1:SignedInfo>
+    <ns1:SignatureValue>J0cSCIAMO+TnFLElSPjMNOPJmUCM4L1XDZDQmgIr4BSar43ckx/zG2wfRxgWjJYfYgbjkKrb1n9nNjftAloUFamI2tcXCgjgzHsAN7GRVjOhcoA6Mj4Kl9TzIXdGWhqdJe6IRH/d4pAl+ltUYp9fNq2/U/3T1EoALA/y8ovaWueP9jmSKfM72SrfgU7p421UDFFYaTxCNygF/SkVZUpCOKMpvyoiCFWqThZwow7Wu27ouo5aU+72XMmq8Pgm9EO2LPx8De7LIeL/as4pq1aUAlXNSWuFUtXE0YSuZ1KPkF6vGJfMLlPYmcBcMYVyu+esYGzsDH6b60bkh3VvlUqWIw==</ns1:SignatureValue>
+    <ns1:KeyInfo>
+      <ns1:X509Data>
+        <ns1:X509Certificate>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</ns1:X509Certificate>
+      </ns1:X509Data>
+    </ns1:KeyInfo>
+  </ns1:Signature>
+</NFCom>

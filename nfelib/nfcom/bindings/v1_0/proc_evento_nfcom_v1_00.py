@@ -8,20 +8,19 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from nfelib.nfcom.bindings.v1_0.cons_stat_serv_nfcom_tipos_basico_v1_00 import (
-    TretConsStatServ,
+from nfelib.nfcom.bindings.v1_0.evento_nfcom_tipos_basico_v1_00 import (
+    TprocEvento,
 )
 
 __NAMESPACE__ = "http://www.portalfiscal.inf.br/nfcom"
 
 
 @dataclass(kw_only=True)
-class RetConsStatServNfcom(TretConsStatServ):
+class ProcEventoNfcom(TprocEvento):
     """
-    Schema XML de validação do Resultado da Consulta do Status do Serviço
-    de NFCom.
+    Pedido de Registro de Evento de NFCom processado.
     """
 
     class Meta:
-        name = "retConsStatServNFCom"
+        name = "procEventoNFCom"
         namespace = "http://www.portalfiscal.inf.br/nfcom"

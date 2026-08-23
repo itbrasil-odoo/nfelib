@@ -13,7 +13,8 @@ from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from nfelib.nfcom.bindings.v1_0.nfcom_v1_00 import Nfcom
 
 SAMPLES = os.path.join("nfelib", "nfcom", "samples", "v1_0")
-SCHEMA = os.path.join("nfelib", "nfcom", "schemas", "v1_0", "nfcom_v1.00.xsd")
+SCHEMA_DIR = os.path.join("nfelib", "nfcom", "schemas", "v1_0")
+SCHEMA = os.path.join(SCHEMA_DIR, "nfcom_v1.00.xsd")
 
 
 class NFComTests(TestCase):
@@ -74,3 +75,29 @@ class NFComTests(TestCase):
         self.assertTrue(inf.gFat.CompetFat)
         self.assertTrue(inf.gFat.codBarras)
         self.assertTrue(inf.det[0].prod.cClass)
+
+    def test_schemas_are_the_nt_2026_002_package(self):
+        """Trava a aderência ao pacote em vigor, PL_NFCOM_1.00_NT2026.002 RTC_1.01.
+
+        Os XSDs não declaram a NT que os gerou, então a única forma de saber de
+        que pacote eles vieram é olhar o que a NT mudou. Se alguém reapontar os
+        schemas para um pacote anterior, este teste cai — e é o que queremos: um
+        binding gerado do leiaute errado produz XML que a SEFAZ rejeita com
+        cStat 215, e isso só se descobre transmitindo.
+        """
+        fonte = ""
+        for arquivo in os.listdir(SCHEMA_DIR):
+            if arquivo.endswith(".xsd"):
+                with open(os.path.join(SCHEMA_DIR, arquivo), encoding="utf-8") as f:
+                    fonte += f.read()
+
+        # A NT 2026.002 trocou pISEspec por adRemIS e removeu TMeioPgto.
+        self.assertIn("adRemIS", fonte, "schemas anteriores à NT 2026.002")
+        self.assertNotIn("pISEspec", fonte, "pISEspec saiu na NT 2026.002")
+        self.assertNotIn("TMeioPgto", fonte, "TMeioPgto saiu na NT 2026.002")
+        # E acrescentou pagamento antecipado e cobrança por terceiro.
+        self.assertIn("gPagAntecipado", fonte)
+        self.assertIn("CNPJCobrTerc", fonte)
+        # O evento de vinculação de pagamento veio na NT 2026.001 e está no
+        # mesmo pacote.
+        self.assertIn("evVincPgto_v1.00.xsd", os.listdir(SCHEMA_DIR))

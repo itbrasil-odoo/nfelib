@@ -12,25 +12,33 @@ from enum import Enum
 __NAMESPACE__ = "http://www.portalfiscal.inf.br/nfcom"
 
 
-class EvCancNfcomDescEvento(Enum):
-    CANCELAMENTO = "Cancelamento"
+class EvCancVincPgtoDescEvento(Enum):
+    CANCELAMENTO_DA_VINCULA_O_DO_PAGAMENTO = (
+        "Cancelamento da vinculação do pagamento"
+    )
+    CANCELAMENTO_DA_VINCULACAO_DO_PAGAMENTO = (
+        "Cancelamento da vinculacao do pagamento"
+    )
 
 
 @dataclass(kw_only=True)
-class EvCancNfcom:
+class EvCancVincPgto:
     """
-    Schema XML de validação do evento do cancelamento 110111.
+    Schema XML de validação do evento cancelamento da vinculação do pgto
+    110301.
 
-    :ivar descEvento: Descrição do Evento - “Cancelamento”
-    :ivar nProt: Número do Protocolo de Status da NFCom
-    :ivar xJust: Justificativa do Cancelamento
+    :ivar descEvento: Descrição do Evento - “Cancelamento da vinculação
+        do pagamento”
+    :ivar nProt: Número do Protocolo de autorização do DFe
+    :ivar nProtVincPgto: Número do Protocolo de autorização do evento a
+        ser cancelado
     """
 
     class Meta:
-        name = "evCancNFCom"
+        name = "evCancVincPgto"
         namespace = "http://www.portalfiscal.inf.br/nfcom"
 
-    descEvento: EvCancNfcomDescEvento = field(
+    descEvento: EvCancVincPgtoDescEvento = field(
         metadata={
             "type": "Element",
             "white_space": "preserve",
@@ -43,12 +51,10 @@ class EvCancNfcom:
             "pattern": r"[0-9]{16}",
         }
     )
-    xJust: str = field(
+    nProtVincPgto: str = field(
         metadata={
             "type": "Element",
-            "min_length": 15,
-            "max_length": 255,
             "white_space": "preserve",
-            "pattern": r"[!-ÿ]{1}[ -ÿ]{0,}[!-ÿ]{1}|[!-ÿ]{1}",
+            "pattern": r"[0-9]{16}",
         }
     )
