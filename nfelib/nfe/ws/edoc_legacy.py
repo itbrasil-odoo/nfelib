@@ -36,19 +36,43 @@ from xsdata.formats.dataclass.serializers import XmlSerializer
 from xsdata.formats.dataclass.serializers.config import SerializerConfig
 
 
+# Any namespace prefix bound to the SOAP envelope, or none at all.
+#
+# The previous pattern only accepted `env`, `soap` and `soapenv`. SEFAZ-MG
+# answers NFeConsultaProtocolo4 with an uppercase `S:` prefix:
+#
+#     <S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Body>
+#
+# so the search never matched, `analisar_retorno_raw_xsdata` fell through and
+# returned None, and callers blew up far from here — `l10n_br_nfe` does
+# `check_response.resposta.xMotivo` and raises
+# `AttributeError: 'NoneType' object has no attribute 'resposta'`.
+#
+# The prefix is chosen by the server and carries no meaning: only the namespace
+# it is bound to does. Accepting any prefix is what the SOAP spec asks for.
+SOAP_BODY_PATTERN = re.compile(
+    r"<(?:[A-Za-z_][\w.-]*:)?Body[^>]*>(.*?)</(?:[A-Za-z_][\w.-]*:)?Body>",
+    re.DOTALL,
+)
+
+
 def analisar_retorno_raw_xsdata(operacao, raiz, xml, retorno, classe):
     retorno.raise_for_status()
-    # Pattern to grab <soap:Body ... > OR <env:Body ... >
-    # The prefix (soap or env) varies depending on the UF
-    pattern = r"<(?:env|soap|soapenv):Body[^>]*>(.*?)</(?:env|soap|soapenv):Body>"
-    match = re.search(pattern, retorno.text.replace("\n", ""))
-    if match:
-        xml_resposta = match.group(1)
-        # pega a resposta de dentro do envelope
-        resultado = etree.tostring(etree.fromstring(xml_resposta)[0])
-        parser = XmlParser(context=XmlContext())
-        resposta = parser.from_string(resultado.decode(), classe)
-        return RetornoSoap(operacao, raiz, xml, retorno, resposta)
+    match = SOAP_BODY_PATTERN.search(retorno.text)
+    if not match:
+        # Returning None silently cost a real NF-e: the caller could not tell
+        # "not authorized" from "I could not read the answer".
+        raise ValueError(
+            "Could not find the SOAP Body in the %s response from %s. "
+            "First 500 characters: %s"
+            % (operacao, getattr(retorno, "url", "?"), retorno.text[:500])
+        )
+    xml_resposta = match.group(1)
+    # pega a resposta de dentro do envelope
+    resultado = etree.tostring(etree.fromstring(xml_resposta)[0])
+    parser = XmlParser(context=XmlContext())
+    resposta = parser.from_string(resultado.decode(), classe)
+    return RetornoSoap(operacao, raiz, xml, retorno, resposta)
 
 
 class DocumentoElectronicoAdapter(DocumentoEletronico):
